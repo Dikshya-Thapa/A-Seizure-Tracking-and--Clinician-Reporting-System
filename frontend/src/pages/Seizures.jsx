@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { createSeizure, getSeizures } from "../api/seizures";
+import { useOnlineStatus } from "../hooks/useOnlineStatus";
 
 const TYPES = [
   { value: "focal", label: "Focal" },
@@ -27,6 +28,7 @@ const typeLabel = (value) =>
   TYPES.find((t) => t.value === value)?.label || value;
 
 export default function Seizures() {
+  const isOnline = useOnlineStatus();
   const [type, setType] = useState("unknown");
   const [startedAt, setStartedAt] = useState(toLocalInput(new Date()));
   const [minutes, setMinutes] = useState(0);
@@ -93,6 +95,7 @@ export default function Seizures() {
         <Link to="/dashboard">Back to dashboard</Link>
       </p>
       <h1>Log a seizure</h1>
+            <p>Status: {isOnline ? "Online" : "Offline"}</p>
 
       <form onSubmit={handleSubmit}>
         <div>
