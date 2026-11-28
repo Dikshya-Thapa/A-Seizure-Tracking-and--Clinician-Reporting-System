@@ -124,7 +124,7 @@ export default function Seizures() {
           </label>
         </div>
 
-        <div>
+        <div className="row">
           <label>
             Minutes
             <input
